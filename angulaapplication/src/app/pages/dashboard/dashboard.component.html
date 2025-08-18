@@ -1,1 +1,130 @@
-<p>dashboard works!</p>
+<div class="dashboard" [class.dark]="darkMode">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
+    <div class="brand">
+      <span class="brand-logo">⦿</span>
+      <span class="brand-name" *ngIf="!sidebarCollapsed">MyApp</span>
+    </div>
+
+    <nav class="nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="icon">🏠</span>
+        <span class="label" *ngIf="!sidebarCollapsed">Home</span>
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+        <span class="icon">👤</span>
+        <span class="label" *ngIf="!sidebarCollapsed">Profile</span>
+      </a>
+      <a routerLink="/reports" routerLinkActive="active" class="nav-item">
+        <span class="icon">📊</span>
+        <span class="label" *ngIf="!sidebarCollapsed">Reports</span>
+      </a>
+      <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+        <span class="icon">⚙️</span>
+        <span class="label" *ngIf="!sidebarCollapsed">Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-danger" (click)="logout()">
+        <span class="icon">⎋</span>
+        <span class="label" *ngIf="!sidebarCollapsed">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="left">
+        <button class="icon-btn" (click)="toggleSidebar()" title="Toggle sidebar">☰</button>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="right">
+        <button class="icon-btn" (click)="toggleTheme()" title="Toggle theme">
+          {{ darkMode ? '🌙' : '🌞' }}
+        </button>
+        <div class="user">
+          <img class="avatar" src="https://i.pravatar.cc/40" alt="avatar" />
+          <div class="meta">
+            <div class="name">{{ username }}</div>
+            <div class="role">Signed in</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <!-- Stat Cards -->
+      <section class="cards">
+        <div class="card">
+          <div class="card-title">Users</div>
+          <div class="metric">1,245</div>
+          <div class="trend up">▲ 4.2% vs last week</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Sales</div>
+          <div class="metric">$34,560</div>
+          <div class="trend up">▲ 2.1% MoM</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Reports</div>
+          <div class="metric">87</div>
+          <div class="trend down">▼ 0.8% today</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Open Tasks</div>
+          <div class="metric">12</div>
+          <div class="trend flat">■ on track</div>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="grid-2">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Sales Overview</h3>
+            <div class="panel-actions">
+              <button class="chip" (click)="randomizeSales()">Refresh</button>
+            </div>
+          </div>
+          <canvas #salesChartCanvas></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <h3>User Growth</h3>
+            <div class="panel-actions">
+              <button class="chip" (click)="randomizeUsers()">Refresh</button>
+            </div>
+          </div>
+          <canvas #userChartCanvas></canvas>
+        </div>
+      </section>
+
+      <!-- Recent Activity & Quick Actions -->
+      <section class="grid-2">
+        <div class="panel">
+          <div class="panel-header"><h3>Recent Activity</h3></div>
+          <ul class="activity">
+            <li>📌 User John updated profile <span class="time">2m ago</span></li>
+            <li>📌 Admin generated report “Q3-Sales” <span class="time">14m ago</span></li>
+            <li>📌 Task “UI Design” marked complete <span class="time">1h ago</span></li>
+            <li>📌 New user invited: jane@company.com <span class="time">3h ago</span></li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><h3>Quick Actions</h3></div>
+          <div class="quick-actions">
+            <button class="qa" routerLink="/profile">Edit Profile</button>
+            <button class="qa" routerLink="/reports">Generate Report</button>
+            <button class="qa" routerLink="/settings">Security Settings</button>
+            <button class="qa" (click)="logout()">Logout</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

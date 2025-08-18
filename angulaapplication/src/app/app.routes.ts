@@ -3,6 +3,7 @@ import { Logincomponent  } from './pages/login/login.component';
 import { Layoutcomponent  } from './pages/layout/layout.component';
 import { Dashboardcomponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent  } from './pages/profile/profile.component';
+import { Landing  } from './pages/landing/landing.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -16,6 +17,10 @@ export const routes: Routes = [
         {
         path: 'profile',
         component: ProfileComponent
+        },
+        {
+        path: 'landing',
+        component: Landing
         }
        ]
     }

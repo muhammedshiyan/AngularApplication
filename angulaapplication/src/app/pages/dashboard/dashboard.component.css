@@ -1,0 +1,74 @@
+:host { display:block; }
+.dashboard { display:flex; min-height:100vh; background:#f5f7fb; color:#111827; }
+.dashboard.dark { background:#0f172a; color:#e5e7eb; }
+
+/* Sidebar */
+.sidebar { width:260px; background:#ffffff; border-right:1px solid #e5e7eb; display:flex; flex-direction:column; transition:width .2s ease; }
+.dashboard.dark .sidebar { background:#111827; border-color:#1f2937; }
+.sidebar.collapsed { width:72px; }
+.brand { display:flex; align-items:center; gap:10px; padding:16px; font-weight:700; border-bottom:1px solid #e5e7eb; }
+.dashboard.dark .brand { border-color:#1f2937; }
+.brand-logo { font-size:18px; }
+.nav { padding:8px; display:flex; flex-direction:column; gap:6px; }
+.nav-item { display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px; text-decoration:none; color:inherit; }
+.nav-item:hover { background:#eef2ff; }
+.dashboard.dark .nav-item:hover { background:#1f2937; }
+.nav-item.active { background:#dbeafe; font-weight:600; }
+.dashboard.dark .nav-item.active { background:#374151; }
+.icon { width:24px; text-align:center; }
+.sidebar-footer { margin-top:auto; padding:12px; }
+.btn { width:100%; padding:10px 12px; border-radius:8px; border:none; cursor:pointer; }
+.btn-danger { background:#ef4444; color:white; }
+.btn-danger:hover { background:#dc2626; }
+
+/* Main */
+.main { display:flex; flex-direction:column; flex:1; min-width:0; }
+.topbar { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#ffffff; border-bottom:1px solid #e5e7eb; position:sticky; top:0; z-index:10; }
+.dashboard.dark .topbar { background:#111827; border-color:#1f2937; }
+.left { display:flex; align-items:center; gap:12px; }
+.icon-btn { background:transparent; border:1px solid #e5e7eb; padding:6px 10px; border-radius:8px; cursor:pointer; }
+.dashboard.dark .icon-btn { border-color:#374151; color:#e5e7eb; }
+.right { display:flex; align-items:center; gap:16px; }
+.user { display:flex; align-items:center; gap:10px; }
+.avatar { width:36px; height:36px; border-radius:50%; border:2px solid #e5e7eb; }
+.dashboard.dark .avatar { border-color:#374151; }
+.meta .name { font-weight:600; }
+.content { padding:16px; display:flex; flex-direction:column; gap:16px; }
+
+/* Cards */
+.cards { display:grid; grid-template-columns:repeat(1,minmax(0,1fr)); gap:16px; }
+@media (min-width: 768px){ .cards{ grid-template-columns:repeat(4, minmax(0,1fr)); } }
+.card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; transition:box-shadow .2s ease, transform .1s ease; }
+.dashboard.dark .card { background:#111827; border-color:#1f2937; }
+.card:hover { box-shadow:0 6px 16px rgba(0,0,0,0.08); transform:translateY(-1px); }
+.card-title { font-size:12px; color:#6b7280; }
+.dashboard.dark .card-title { color:#9ca3af; }
+.metric { font-size:24px; font-weight:700; margin-top:6px; }
+.trend { font-size:12px; margin-top:6px; }
+.up { color:#16a34a; } .down { color:#ef4444; } .flat { color:#6b7280; }
+
+/* Panels & grid */
+.grid-2 { display:grid; grid-template-columns:1fr; gap:16px; }
+@media (min-width: 1024px){ .grid-2{ grid-template-columns:1fr 1fr; } }
+.panel { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
+.dashboard.dark .panel { background:#111827; border-color:#1f2937; }
+.panel-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.chip { border:1px solid #e5e7eb; background:transparent; padding:6px 10px; border-radius:999px; cursor:pointer; }
+.dashboard.dark .chip { border-color:#374151; color:#e5e7eb; }
+
+/* Activity & actions */
+.activity { list-style:none; padding:0; margin:0; }
+.activity li { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed #e5e7eb; }
+.dashboard.dark .activity li { border-color:#1f2937; }
+.activity .time { font-size:12px; color:#6b7280; }
+.quick-actions { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+.qa { padding:10px 12px; border-radius:10px; border:1px solid #e5e7eb; background:#f9fafb; cursor:pointer; }
+.qa:hover { background:#eef2ff; }
+.dashboard.dark .qa { background:#0b1220; border-color:#1f2937; }
+
+/* Responsive */
+@media (max-width: 768px){
+  .sidebar { position:fixed; inset:0 auto 0 0; z-index:20; transform:translateX(0); }
+  .sidebar.collapsed { transform:translateX(-100%); }
+  .main { margin-left:0; }
+}
