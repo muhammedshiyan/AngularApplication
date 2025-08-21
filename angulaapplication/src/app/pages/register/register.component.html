@@ -1,1 +1,17 @@
-<p>register works!</p>
+<div class="register-container">
+  <h2>Register</h2>
+  
+  <form (ngSubmit)="onRegister()">
+    <input type="text" [(ngModel)]="registerObj.name" name="name" placeholder="Name" required />
+    <input type="email" [(ngModel)]="registerObj.email" name="email" placeholder="Email" required />
+    <input type="password" [(ngModel)]="registerObj.passwordHash" name="passwordHash" placeholder="Password" required />
+    <input type="text" [(ngModel)]="registerObj.phone" name="phone" placeholder="Phone" />
+
+    <!-- roles dropdown -->
+    <select [(ngModel)]="registerObj.roleId" name="roleId" required>
+      <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+    </select>
+
+    <button type="submit">Register</button>
+  </form>
+</div>
