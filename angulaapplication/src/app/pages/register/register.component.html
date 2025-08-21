@@ -1,17 +1,34 @@
-<div class="register-container">
-  <h2>Register</h2>
-  
-  <form (ngSubmit)="onRegister()">
-    <input type="text" [(ngModel)]="registerObj.name" name="name" placeholder="Name" required />
-    <input type="email" [(ngModel)]="registerObj.email" name="email" placeholder="Email" required />
-    <input type="password" [(ngModel)]="registerObj.passwordHash" name="passwordHash" placeholder="Password" required />
-    <input type="text" [(ngModel)]="registerObj.phone" name="phone" placeholder="Phone" />
+<div class="register-wrapper">
+  <div class="register-card">
+    <h2>Create Account</h2>
+    <p class="subtitle">Fill in the details to register</p>
 
-    <!-- roles dropdown -->
-    <select [(ngModel)]="registerObj.roleId" name="roleId" required>
-      <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
-    </select>
+    <form (ngSubmit)="onRegister()" class="form">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="registerObj.name" name="name" placeholder="Full Name" required />
+      </div>
 
-    <button type="submit">Register</button>
-  </form>
+      <div class="form-group">
+        <input type="email" [(ngModel)]="registerObj.email" name="email" placeholder="Email" required />
+      </div>
+
+      <div class="form-group">
+        <input type="password" [(ngModel)]="registerObj.passwordHash" name="passwordHash" placeholder="Password" required />
+      </div>
+
+      <div class="form-group">
+        <input type="text" [(ngModel)]="registerObj.phone" name="phone" placeholder="Phone" />
+      </div>
+
+      <div class="form-group">
+        <select [(ngModel)]="registerObj.roleId" name="roleId" required>
+          <option value="" disabled selected>Select Role</option>
+          <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+
+        </select>
+      </div>
+
+      <button type="submit" class="btn-register">Register</button>
+    </form>
+  </div>
 </div>
