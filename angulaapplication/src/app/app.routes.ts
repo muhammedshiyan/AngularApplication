@@ -5,6 +5,7 @@ import { Dashboardcomponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent  } from './pages/profile/profile.component';
 import { Landing  } from './pages/landing/landing.component';
 import { Registercomponent } from './pages/register/register.component';
+import { ChangePasswordComponent } from './pages/changepassword/changepassword.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -26,6 +27,10 @@ export const routes: Routes = [
         {
         path: 'register',
         component: Registercomponent
+        },
+        {
+        path: 'changepassword',
+        component: ChangePasswordComponent
         }
        ]
     }

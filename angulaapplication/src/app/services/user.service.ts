@@ -27,7 +27,7 @@ onEditProfile(user: any): Observable<any> {
 }
 
 onChangePassword(userId: number, password: string): Observable<any> {
-  return this.http.put<any>(`${this.apiUrl}/change-password/${userId}`, password, {
+  return this.http.put<any>(`${this.apiUrl}/change-password/${userId}`, JSON.stringify(password), {
     headers: { 'Content-Type': 'application/json' }
   });
 }
