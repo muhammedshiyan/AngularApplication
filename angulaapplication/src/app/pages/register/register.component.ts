@@ -21,6 +21,7 @@ export class Registercomponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRoles();
+    this.registerObj.roleId = this.roles[0].roleId;
   }
 
   loadRoles() {
@@ -33,7 +34,19 @@ export class Registercomponent implements OnInit {
       }
     });
   }
+  onRoleChange(event: any): void {
+    console.log("Selected onRoleChange event:");
+  //const selectedRoleId = event.target.value;
+  //const selectedRole = this.roles.find(r => r.roleId == selectedRoleId);
+  
+  //////console.log("Selected Role ID:", selectedRoleId);
+  //console.log("Selected Role Object:", selectedRole);
 
+  // Example: set something else based on role
+  ////if (selectedRole?.roleName === 'admin') {
+   // alert("Admin role selected!");
+  //}
+}
   onRegister() {
     console.log("Register clicked", this.registerObj);
     this.userService.registerUser(this.registerObj).subscribe({
@@ -46,7 +59,7 @@ export class Registercomponent implements OnInit {
         console.error(err);
         alert(err.error || 'Registration failed');
       }
-    });
+    });  
   }
 }
 

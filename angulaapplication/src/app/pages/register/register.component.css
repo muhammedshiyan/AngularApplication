@@ -1,0 +1,94 @@
+
+.register-table {
+  width: 100%;   /* full page width */
+  /* or */
+  width: 800px;  /* fixed width */
+}
+.register-table td, 
+.register-table th {
+  padding: 15px;
+  font-size: 18px;
+}
+
+/* Wrapper centers everything */
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #007bff, #6c63ff);
+  padding: 20px;
+}
+
+/* Card styling */
+.register-card {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-card h2 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.register-card .subtitle {
+  color: #777;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* Table (optional if you want to keep register-table look) */
+.register-table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.3);
+  outline: none;
+}
+
+/* Button styling */
+.btn-register {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-register:hover {
+  background: #0056b3;
+  transform: scale(1.03);
+}
