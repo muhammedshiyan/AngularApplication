@@ -1,1 +1,67 @@
-<p>profile works!</p>
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <!-- Header Section -->
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <img src="assets/images/default-avatar.png" alt="User Avatar">
+      </div>
+      <div class="profile-info">
+        <h2>{{ user.fullName }}</h2>
+        <p class="email">{{ user.email }}</p>
+        <p class="role">{{ user.role }}</p>
+        <button class="btn-edit" (click)="onEditProfile()">Edit Profile</button>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Personal Details Section -->
+    <div class="profile-section">
+      <h3>Personal Information</h3>
+      <table class="profile-table">
+        <tr>
+          <th>Full Name</th>
+          <td>{{ user.fullName }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+          <th>Phone</th>
+          <td>{{ user.phone }}</td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>{{ user.address }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Account Details Section -->
+    <div class="profile-section">
+      <h3>Account Details</h3>
+      <table class="profile-table">
+        <tr>
+          <th>Username</th>
+          <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+          <th>Role</th>
+          <td>{{ user.role }}</td>
+        </tr>
+        <tr>
+          <th>Status</th>
+          <td><span class="status active">Active</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Security Section -->
+    <div class="profile-section">
+      <h3>Security</h3>
+      <button class="btn-change" (click)="onChangePassword()">Change Password</button>
+      <!-- <button class="btn-logout" (click)="onLogout()">Logout</button> -->
+    </div>
+  </div>
+</div>

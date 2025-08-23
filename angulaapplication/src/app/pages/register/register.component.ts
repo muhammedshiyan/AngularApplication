@@ -35,7 +35,7 @@ export class Registercomponent implements OnInit {
     });
   }
   onRoleChange(event: any): void {
-    console.log("Selected onRoleChange event:");
+  console.log("Selected onRoleChange event:");
   //const selectedRoleId = event.target.value;
   //const selectedRole = this.roles.find(r => r.roleId == selectedRoleId);
   
