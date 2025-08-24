@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-
+import { Router } from '@angular/router'; 
+import { ChangePasswordComponent } from '../changepassword/changepassword.component';
 
 @Component({
   selector: 'app-profile',
@@ -17,8 +18,10 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private fb: FormBuilder
+    ,private router: Router
     //,private storage: StorageService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     // Example: get userId from localStorage/session
@@ -62,18 +65,6 @@ export class ProfileComponent implements OnInit {
 
   // 🔹 Change password
   onChangePassword(): void {
-    if (!this.newPassword) {
-      alert('Please enter a new password');
-      return;
-    }
-
-    this.userService.onChangePassword(this.userId, this.newPassword).subscribe({
-      next: (res) => {
-        alert(res.message);
-      },
-      error: (err) => {
-        console.error('Error changing password', err);
-      }
-    });
+    this.router.navigate(['/changepassword']);
   }
 }
