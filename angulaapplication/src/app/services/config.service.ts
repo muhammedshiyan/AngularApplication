@@ -12,7 +12,7 @@ export class ConfigService {
 
    // Load configuration from API
   loadConfig(): Promise<void> {
-    return firstValueFrom(this.http.get<Record<string, any>>(`${environment.baseApiUrl}/config`))
+    return firstValueFrom(this.http.get<Record<string, any>>(`${environment.baseApiUrl}/config/config`))
       .then(cfg => {
         this.config = cfg; // store globally in the service
         console.log(cfg);
