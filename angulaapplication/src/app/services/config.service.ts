@@ -6,7 +6,7 @@ import { environment } from '../environment/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
-  private config: any;
+  public config: any = {};
 
   constructor(private http: HttpClient) {}
 
