@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; 
-
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-login',
@@ -14,25 +14,10 @@ import { Router } from '@angular/router';
 export class Logincomponent {
 
   Loginobj: Login;
-  constructor(private http:HttpClient, private router: Router){
+  constructor(private http:HttpClient, private router: Router,private authService: AuthService){
 
     this.Loginobj=new Login();
   }
-
-//   onLogin()
-// {
-// console.log("Login clicked");
-// this.http.post('https://localhost:7108/api/Auth/login',this.Loginobj).subscribe((res:any)=>{
-//   if(res.result)
-//   {
-//     alert('Login Success');
-//   }
-//   else{
-//     alert(res.message);
-//   }
-// })
-// }
-
 onLogin()
 {
 console.log("Login clicked");
@@ -44,6 +29,10 @@ console.log("Login clicked");
           alert('Login Success! Token: ' + res.token);
           // you can store it in localStorage for later API calls
           localStorage.setItem('jwtToken', res.token);
+          localStorage.setItem("accessToken", res.token);
+          localStorage.setItem("refreshToken", res.refreshToken);
+          console.log("accessToken", res.token);
+          console.log("refreshToken", res.refreshToken);
           this.router.navigate(['/landing']);
         } else {
           alert('Login failed!');

@@ -4,29 +4,23 @@ import { App } from './app/app';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http'; 
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
-import { AuthInterceptor } from './app/auth.interceptor';
+import { AuthInterceptor } from '../src/app/interceptors/auth.interceptor';
 import { ConfigService } from './app/services/config.service';
-import { provideAppInitializer, inject } from '@angular/core';
-import { APP_INITIALIZER } from '@angular/core';
 import { UserService } from './app/services/user.service';
+import { provideAppInitializer, inject } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 bootstrapApplication(App, {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes),  
     provideHttpClient(
-      withFetch(),
-      withInterceptors([AuthInterceptor])
+     // withFetch()
+      //,withInterceptors([AuthInterceptor])
     ),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ConfigService,
-      UserService,
-    // ✅ Correct usage for Angular 16+
-    provideAppInitializer(() => {
-      const configService = inject(ConfigService);
-      return configService.loadConfig(); // return the promise directly
-    })
-    , provideAppInitializer(() => {
-      const userService = inject(UserService);
-      return userService.loadInitialUser(); // should return Promise or void
-    })
+    UserService,
+    provideAppInitializer(() => inject(ConfigService).loadConfig()),
+    provideAppInitializer(() => inject(UserService).loadInitialUser())
   ]
 }).catch(err => console.error(err));
