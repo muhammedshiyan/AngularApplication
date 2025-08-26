@@ -7,10 +7,21 @@ import { environment } from '../environment/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = environment.baseApiUrl ;//'https://localhost:7108/api/Users'; // your backend API
+  private user :any;
+  private apiUrl = environment.apiUrlusers;//'https://localhost:7108/api/Users'; // your backend API
 
   constructor(private http: HttpClient) {}
-
+  loadInitialUser(): Promise<any> {
+    return this.http.get(`${this.apiUrl}/userdata/1`)
+      .toPromise()
+      .then(data => {
+        this.user = data;
+      })
+      .catch(err => {
+        console.error('User init failed', err);
+        this.user = null;
+      });
+  }
   getRoles(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/roles`);
   }

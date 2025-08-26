@@ -5,7 +5,8 @@ export const environment = {
 
   // ✅ Base URL
   baseApiUrl,
-
+  apiUrlusers: `${baseApiUrl}/users`,
+  apiUrlconfig: `${baseApiUrl}/config`,
   // ✅ Commonly used project-wide constants
   appName: 'My Angular App',
   defaultLanguage: 'en',

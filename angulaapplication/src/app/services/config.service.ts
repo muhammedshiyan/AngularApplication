@@ -7,12 +7,11 @@ import { environment } from '../environment/environment';
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
   public config: any = {};
-
   constructor(private http: HttpClient) {}
-
+  private Apiurl = environment.apiUrlconfig; 
    // Load configuration from API
   loadConfig(): Promise<void> {
-    return firstValueFrom(this.http.get<Record<string, any>>(`${environment.baseApiUrl}/config/config`))
+    return firstValueFrom(this.http.get<Record<string, any>>(`${this.Apiurl}/config`))
       .then(cfg => {
         this.config = cfg; // store globally in the service
         console.log(cfg);
