@@ -1,0 +1,53 @@
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <span class="section-subtitle">Our Story</span>
+        <h2 class="section-title">Authentic Italian Cuisine Since 1998</h2>
+        <p class="about-description">
+          Founded by the Rossi family, Bella Vista has been serving authentic Italian cuisine for over two decades. 
+          Our commitment to using only the freshest ingredients, traditional recipes passed down through generations, 
+          and creating a warm, welcoming atmosphere has made us a beloved destination for food lovers.
+        </p>
+        <p class="about-description">
+          Every dish is prepared with passion and attention to detail, ensuring that each bite transports you 
+          to the heart of Italy. From our wood-fired pizzas to our handmade pasta, we bring you the true flavors 
+          of Italian culinary tradition.
+        </p>
+        
+        <div class="about-features">
+          <div class="feature">
+            <div class="feature-icon">🍕</div>
+            <h4>Wood-Fired Oven</h4>
+            <p>Authentic Italian pizzas cooked in our traditional wood-fired oven</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🌿</div>
+            <h4>Fresh Ingredients</h4>
+            <p>Locally sourced, organic ingredients delivered fresh daily</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">👨‍🍳</div>
+            <h4>Expert Chefs</h4>
+            <p>Experienced chefs trained in traditional Italian cooking methods</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-images">
+        <div class="image-grid">
+          <img src="assets/images/chef-cooking.jpg" alt="Chef preparing food" class="about-img main-img">
+          <img src="assets/images/restaurant-interior.jpg" alt="Restaurant interior" class="about-img secondary-img">
+          <img src="assets/images/ingredients.jpg" alt="Fresh ingredients" class="about-img tertiary-img">
+        </div>
+      </div>
+    </div>
+    
+    <div class="stats-section">
+      <div class="stat" *ngFor="let stat of stats">
+        <h3 class="stat-number">{{ stat.number }}</h3>
+        <p class="stat-label">{{ stat.label }}</p>
+      </div>
+    </div>
+  </div>
+</section>

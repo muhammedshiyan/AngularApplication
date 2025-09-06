@@ -1,0 +1,9 @@
+.restaurant-landing {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,63 @@
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Our Menu</span>
+      <h2 class="section-title">Discover Our Signature Dishes</h2>
+      <p class="section-description">
+        Each dish is crafted with the finest ingredients and traditional Italian cooking methods,
+        bringing you authentic flavors that have been perfected over generations.
+      </p>
+    </div>
+
+    <!-- Featured Items -->
+    <div class="featured-section">
+      <h3 class="featured-title">Chef's Specials</h3>
+      <div class="featured-grid">
+        <div class="featured-item" *ngFor="let item of featuredItems">
+          <div class="featured-image">
+            <img [src]="item.image" [alt]="item.name">
+            <div class="featured-badge">Featured</div>
+          </div>
+          <div class="featured-content">
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.description }}</p>
+            <div class="price">${{ item.price }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Categories -->
+    <div class="menu-categories">
+      <button 
+        *ngFor="let category of categories"
+        [class]="'category-btn' + (activeCategory === category.id ? ' active' : '')"
+        (click)="setActiveCategory(category.id)">
+        {{ category.name }}
+      </button>
+    </div>
+
+    <!-- Menu Items Grid -->
+    <div class="menu-grid">
+      <div class="menu-item" *ngFor="let item of filteredItems">
+        <div class="menu-item-image">
+          <img [src]="item.image" [alt]="item.name">
+          <div class="menu-item-overlay">
+            <button class="order-btn">Order Now</button>
+          </div>
+        </div>
+        <div class="menu-item-content">
+          <div class="menu-item-header">
+            <h4 class="menu-item-name">{{ item.name }}</h4>
+            <span class="menu-item-price">${{ item.price }}</span>
+          </div>
+          <p class="menu-item-description">{{ item.description }}</p>
+          <div class="menu-item-footer">
+            <span class="menu-item-category">{{ item.category }}</span>
+            <span class="menu-item-rating">⭐ {{ item.rating }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

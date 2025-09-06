@@ -1,0 +1,93 @@
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">What Our Customers Say</span>
+      <h2 class="section-title">Testimonials & Reviews</h2>
+      <p class="section-description">
+        Don't just take our word for it. Here's what our valued customers have to say about their dining experience at Bella Vista.
+      </p>
+    </div>
+
+    <div class="testimonials-carousel" 
+         (mouseenter)="stopAutoPlay()" 
+         (mouseleave)="startAutoPlay()">
+      
+      <!-- Navigation Buttons -->
+      <button class="carousel-btn prev-btn" (click)="prevSlide()" aria-label="Previous testimonial">
+        &#8249;
+      </button>
+      <button class="carousel-btn next-btn" (click)="nextSlide()" aria-label="Next testimonial">
+        &#8250;
+      </button>
+
+      <!-- Testimonials Grid -->
+      <div class="testimonials-grid">
+        <div class="testimonial-card" 
+             *ngFor="let testimonial of visibleTestimonials; let i = index"
+             [class.center]="i === 1">
+          <div class="testimonial-content">
+            <div class="quote-icon">"</div>
+            <div class="rating">
+              <span class="star filled" *ngFor="let star of getStars(testimonial.rating)">★</span>
+            </div>
+            <p class="review-text">{{ testimonial.review }}</p>
+          </div>
+          
+          <div class="testimonial-author">
+            <div class="author-image">
+              <img [src]="testimonial.image" [alt]="testimonial.name">
+            </div>
+            <div class="author-info">
+              <h4 class="author-name">{{ testimonial.name }}</h4>
+              <p class="author-role">{{ testimonial.role }}</p>
+              <span class="review-date">{{ testimonial.date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination Dots -->
+      <div class="pagination-dots">
+        <button 
+          *ngFor="let testimonial of testimonials; let i = index"
+          class="dot"
+          [class.active]="i === currentIndex"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to testimonial ' + (i + 1)">
+        </button>
+      </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-info">
+          <h3>4.9/5</h3>
+          <p>Average Rating</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">💬</div>
+        <div class="stat-info">
+          <h3>2,500+</h3>
+          <p>Happy Reviews</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-info">
+          <h3>Award</h3>
+          <p>Best Italian 2023</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">👨‍👩‍👧‍👦</div>
+        <div class="stat-info">
+          <h3>50K+</h3>
+          <p>Satisfied Customers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
