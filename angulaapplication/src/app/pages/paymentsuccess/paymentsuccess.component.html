@@ -1,0 +1,61 @@
+<div id="payment-container" class="payment-success-container">
+  <div class="card shadow-lg p-4 rounded-lg animate-fade-in" id="successCard">
+    <div class="icon-container">
+      <span class="success-icon">✅</span>
+    </div>
+
+    <h2 class="title">Payment Successful</h2>
+
+    <div class="details">
+      <p id="txnIdContainer"><strong>Transaction ID:</strong> <span id="txnId"></span></p>
+      <p><strong>Status:</strong> <span id="status"></span></p>
+    </div>
+
+    <div class="actions">
+      <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+      <button id="downloadBtn" class="btn btn-secondary">Download Receipt</button>
+    </div>
+  </div>
+
+  <div class="card shadow-lg p-4 rounded-lg error-card animate-fade-in" id="errorCard">
+    <h2 class="title text-danger">⚠ Payment Failed</h2>
+    <p>Something went wrong. Please try again or contact support.</p>
+    <div class="actions">
+      <a href="payment.html" class="btn btn-warning">Retry Payment</a>
+    </div>
+  </div>
+</div>
+<script>
+  // Example: simulate payment result
+  const paymentSuccess = true; // toggle this to false for failure
+  const txnId = "TXN123456";
+  const status = "SUCCESS";
+
+  const successCard = document.getElementById("successCard");
+  const errorCard = document.getElementById("errorCard");
+  const txnIdContainer = document.getElementById("txnIdContainer");
+  const txnIdSpan = document.getElementById("txnId");
+  const statusSpan = document.getElementById("status");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  if (paymentSuccess) {
+    successCard.style.display = "block";
+    errorCard.style.display = "none";
+    txnIdSpan.textContent = txnId;
+    statusSpan.textContent = status;
+  } else {
+    successCard.style.display = "none";
+    errorCard.style.display = "block";
+  }
+
+  // Optional: download receipt
+  downloadBtn.addEventListener("click", () => {
+    const receiptContent = `Transaction ID: ${txnId}\nStatus: ${status}`;
+    const blob = new Blob([receiptContent], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "receipt.txt";
+    link.click();
+  });
+</script>
+

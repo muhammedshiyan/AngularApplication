@@ -1,0 +1,30 @@
+<div class="payment-container card">
+  <h2 class="payment-title">💳 Send Money</h2>
+  <p class="amount">Amount: <strong>₹{{ amount }}</strong></p>
+
+  <!-- Select Payment Type -->
+  <div class="payment-types">
+    <label *ngFor="let type of paymentTypes" class="payment-type">
+      <input
+        type="radio"
+        name="paymentType"
+        [value]="type.value"
+        [(ngModel)]="selectedPaymentType"
+      />
+      {{ type.label }}
+    </label>
+  </div>
+
+  <!-- Pay Button -->
+  <button
+    class="btn btn-primary"
+    [disabled]="!selectedPaymentType || loading"
+    (click)="payByType()"
+  >
+    <span *ngIf="!loading">Send Money</span>
+    <span *ngIf="loading">Processing...</span>
+  </button>
+
+  <!-- Status Message -->
+  <p *ngIf="paymentStatus" class="payment-status">{{ paymentStatus }}</p>
+</div>

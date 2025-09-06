@@ -6,10 +6,13 @@ import { ProfileComponent  } from './pages/profile/profile.component';
 import { Landing  } from './pages/landing/landing.component';
 import { Registercomponent } from './pages/register/register.component';
 import { ChangePasswordComponent } from './pages/changepassword/changepassword.component';
-
+import { PaymentsuccessComponent } from './pages/paymentsuccess/paymentsuccess.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
     {path:'login',component:Logincomponent},
+    { path: 'payment', component: PaymentComponent },
+    { path: 'payment/success', component: PaymentsuccessComponent },
     {path:'',component:Layoutcomponent,
        children:[
         {
