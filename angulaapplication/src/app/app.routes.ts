@@ -14,6 +14,10 @@ import { MenuSectionComponent } from './pages/restaurent/menusection/menu-sectio
 import { AboutSectionComponent } from './pages/restaurent/aboutsection/about-section.component';
 import { ContactSectionComponent } from './pages/restaurent/contactsection/contact-section.component';
 
+import { LandingComponentrestoration } from './pages/restoration/landingrestoration/restorationlanding.component';
+import { MenuSectionComponentrestoration} from './pages/restoration/menusectionrestoration/menu-section.component';
+import { AboutSectionComponentrestoration } from './pages/restoration/aboutsectionrestoration/about-section.component';
+import { ContactSectionComponentrestoration } from './pages/restoration/contactsectionrestoration/contact-section.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -24,6 +28,12 @@ export const routes: Routes = [
     { path: 'menu', component: MenuSectionComponent },
     { path: 'about', component: AboutSectionComponent },
     { path: 'contact', component: ContactSectionComponent },
+
+
+    { path: 'restoration/home', component: LandingComponentrestoration },
+    { path: 'restoration/menu', component: MenuSectionComponentrestoration },
+    { path: 'restoration/about', component: AboutSectionComponentrestoration },
+    { path: 'restoration/contact', component: ContactSectionComponentrestoration },
     //{ path: 'menu/:category', component: MenuComponent }, // Dynamic routing
     {path:'',component:Layoutcomponent,
        children:[
