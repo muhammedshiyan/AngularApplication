@@ -11,12 +11,12 @@ import { CommonModule } from '@angular/common';
   selector: 'app-landingrestoration',
   standalone: true,                  // ✅ make standalone
   imports: [CommonModule,
-     FooterComponentrestoration,
-     HeroSectionComponentrestoration,
-     AboutSectionComponentrestoration,
-     MenuSectionComponentrestoration,
-     TestimonialsSectionrestoration,
-     ContactSectionComponentrestoration,
+      FooterComponentrestoration,
+      HeroSectionComponentrestoration,
+      AboutSectionComponentrestoration,
+      MenuSectionComponentrestoration,
+      TestimonialsSectionrestoration,
+      ContactSectionComponentrestoration,
   ],           // ✅ enable *ngFor
   templateUrl: './restorationlanding.component.html',
   styleUrls: ['./restorationlanding.component.css']
