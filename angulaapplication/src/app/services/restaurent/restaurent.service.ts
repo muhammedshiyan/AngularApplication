@@ -12,4 +12,8 @@ export class RestaurentService {
     return  this.http.get<any[]>(`${this.apiUrl}/menus`);
 
   }
+  getTestimonials(): Observable<any[]> {
+    return  this.http.get<any[]>(`${this.apiUrl}/testimonials`);
+
+  }
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
+import { RestaurentService } from '../../../services/restaurent/restaurent.service';
+
 interface Testimonial {
   id: number;
   name: string;
@@ -7,72 +9,45 @@ interface Testimonial {
   image: string;
   rating: number;
   review: string;
-  date: string;
+  ReviewDate: string;
 }
 
 @Component({
   selector: 'app-testimonialssection',
-  standalone: true,                  // ✅ make standalone
-  imports: [CommonModule],           // ✅ enable *ngFor
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './testimonials-section.component.html',
   styleUrls: ['./testimonials-section.component.css']
 })
-export class TestimonialsSection implements OnInit {
+export class TestimonialsSection implements OnInit, OnDestroy {
   currentIndex = 0;
   autoPlayInterval: any;
-
-  testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      role: 'Food Blogger',
-      image: 'assets/images/testimonial-1.jpg',
-      rating: 5,
-      review: 'Absolutely phenomenal! The pasta was cooked to perfection and the ambiance transported me straight to Italy. This is hands down the best Italian restaurant in the city.',
-      date: '2 weeks ago'
-    },
-    {
-      id: 2,
-      name: 'Michael Chen',
-      role: 'Local Resident',
-      image: 'assets/images/testimonial-2.jpg',
-      rating: 5,
-      review: 'My family and I have been coming here for years, and they never disappoint. The wood-fired pizzas are incredible, and the staff treats you like family.',
-      date: '1 month ago'
-    },
-    {
-      id: 3,
-      name: 'Emma Rodriguez',
-      role: 'Chef',
-      image: 'assets/images/testimonial-3.jpg',
-      rating: 5,
-      review: 'As a fellow chef, I have high standards, and Bella Vista exceeds them all. The attention to detail and authentic flavors are truly remarkable.',
-      date: '3 weeks ago'
-    },
-    {
-      id: 4,
-      name: 'David Thompson',
-      role: 'Business Owner',
-      image: 'assets/images/testimonial-4.jpg',
-      rating: 5,
-      review: 'Perfect for business dinners and special occasions. The service is impeccable, and every dish is a masterpiece. Highly recommended!',
-      date: '1 week ago'
-    },
-    {
-      id: 5,
-      name: 'Lisa Parker',
-      role: 'Travel Enthusiast',
-      image: 'assets/images/testimonial-5.jpg',
-      rating: 5,
-      review: "I've traveled all over Italy, and this restaurant captures the authentic Italian dining experience perfectly. It's like a little slice of heaven!",
-      date: '2 months ago'
-    }
-  ];
-
-  constructor() { }
+  testimonials: Testimonial[] = [];
+  isLoading = true; // Add loading state
+  
+  constructor(private restaurentService: RestaurentService) { }
 
   ngOnInit(): void {
-    this.startAutoPlay();
+    this.getTestimonials();
+    // Start autoplay after data is loaded
+  }
+  
+  getTestimonials(): void {
+    this.restaurentService.getTestimonials().subscribe({
+      next: (data) => {
+        this.testimonials = data;
+        this.isLoading = false;
+        // Start autoplay only after data is loaded
+        if (this.testimonials.length > 0) {
+          this.startAutoPlay();
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching testimonials', err);
+        this.isLoading = false;
+        // Optionally set some fallback data or show error message
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -80,6 +55,7 @@ export class TestimonialsSection implements OnInit {
   }
 
   startAutoPlay(): void {
+    this.stopAutoPlay(); // Clear any existing interval
     this.autoPlayInterval = setInterval(() => {
       this.nextSlide();
     }, 5000);
@@ -88,34 +64,46 @@ export class TestimonialsSection implements OnInit {
   stopAutoPlay(): void {
     if (this.autoPlayInterval) {
       clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
     }
   }
 
   nextSlide(): void {
+    if (this.testimonials.length === 0) return;
     this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
   }
 
   prevSlide(): void {
+    if (this.testimonials.length === 0) return;
     this.currentIndex = this.currentIndex === 0 
       ? this.testimonials.length - 1 
       : this.currentIndex - 1;
   }
 
   goToSlide(index: number): void {
-    this.currentIndex = index;
+    if (index >= 0 && index < this.testimonials.length) {
+      this.currentIndex = index;
+    }
   }
 
   getStars(rating: number): number[] {
-    return Array(rating).fill(0);
+    return Array(Math.max(0, Math.min(5, rating || 0))).fill(0);
   }
 
   get visibleTestimonials(): Testimonial[] {
-    const testimonials = [...this.testimonials];
-    const result = [];
+    if (this.testimonials.length === 0) {
+      return []; // Return empty array instead of undefined items
+    }
     
-    for (let i = 0; i < 3; i++) {
-      const index = (this.currentIndex + i) % testimonials.length;
-      result.push(testimonials[index]);
+    const result: Testimonial[] = [];
+    const testimonialsCount = this.testimonials.length;
+    
+    // Handle cases where we have fewer than 3 testimonials
+    const itemsToShow = Math.min(3, testimonialsCount);
+    
+    for (let i = 0; i < itemsToShow; i++) {
+      const index = (this.currentIndex + i) % testimonialsCount;
+      result.push(this.testimonials[index]);
     }
     
     return result;
