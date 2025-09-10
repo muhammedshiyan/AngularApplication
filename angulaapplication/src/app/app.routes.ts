@@ -22,6 +22,7 @@ import { ContactSectionComponentrestoration } from './pages/restoration/contacts
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
     {path:'login',component:Logincomponent},
+    { path: 'landing', component: RestaurantLandingComponent },
     { path: 'payment', component: PaymentComponent },
     { path: 'payment/success', component: PaymentsuccessComponent },
     { path: 'home', component: RestaurantLandingComponent },
