@@ -1,1 +1,222 @@
-<p>testimonials works!</p>
+<!-- components/testimonials/testimonials.component.html -->
+<section id="testimonials" class="testimonials-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-subtitle">
+        Don't just take our word for it - hear from our satisfied customers
+      </p>
+      
+      <!-- Rating Summary -->
+      <div class="rating-summary">
+        <div class="average-rating">
+          <div class="rating-stars">
+            <span 
+              *ngFor="let star of getStarArray(5); let i = index"
+              class="star"
+              [class.filled]="star"
+            >
+              ★
+            </span>
+          </div>
+          <div class="rating-text">
+            <span class="rating-number">{{ averageRating }}</span>
+            <span class="rating-label">out of 5 stars</span>
+          </div>
+        </div>
+        <div class="review-count">
+          Based on <strong>{{ totalReviews }}+</strong> verified reviews
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div 
+      class="testimonials-carousel"
+      (mouseenter)="onMouseEnter()"
+      (mouseleave)="onMouseLeave()"
+      (touchstart)="onTouchStart($event)"
+      (touchend)="onTouchEnd($event)"
+      (keydown)="onKeyDown($event)"
+      tabindex="0"
+      [attr.aria-label]="'Testimonials carousel, slide ' + (currentSlide + 1) + ' of ' + testimonials.length"
+    >
+      <!-- Carousel Container -->
+      <div class="carousel-container">
+        <div 
+          class="testimonials-track"
+          [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'"
+        >
+          <div
+            *ngFor="let testimonial of testimonials; trackBy: trackByTestimonialId; let i = index"
+            class="testimonial-slide"
+            [class.active]="i === currentSlide"
+          >
+            <div class="testimonial-card">
+              <!-- Quote Icon -->
+              <div class="quote-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,17H17L19,13V7H13V13H16M6,17H9L11,13V7H5V13H8L6,17Z"/>
+                </svg>
+              </div>
+
+              <!-- Customer Info -->
+              <div class="customer-info">
+                <div class="customer-avatar">
+                  <img
+                    [src]="testimonial.avatar"
+                    [alt]="testimonial.name + ' avatar'"
+                    class="avatar-image"
+                    loading="lazy"
+                    (error)="onAvatarError($event)"
+                  />
+                  
+                  <!-- Verified Badge -->
+                  <div class="verified-badge" *ngIf="testimonial.verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23,12L20.56,14.78L20.9,18.46L17.29,19.28L15.4,22.46L12,21L8.6,22.46L6.71,19.28L3.1,18.46L3.44,14.78L1,12L3.44,9.22L3.1,5.54L6.71,4.72L8.6,1.54L12,3L15.4,1.54L17.29,4.72L20.9,5.54L20.56,9.22L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="customer-details">
+                  <h3 class="customer-name">{{ testimonial.name }}</h3>
+                  <p class="customer-position" *ngIf="testimonial.position">
+                    {{ testimonial.position }}
+                    <span *ngIf="testimonial.company"> at {{ testimonial.company }}</span>
+                  </p>
+                  <p class="customer-location" *ngIf="testimonial.location">
+                    📍 {{ testimonial.location }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Rating -->
+              <div class="testimonial-rating">
+                <div class="rating-stars">
+                  <span 
+                    *ngFor="let star of getStarArray(testimonial.rating); let i = index"
+                    class="star"
+                    [class.filled]="star"
+                  >
+                    ★
+                  </span>
+                </div>
+                <span class="rating-date">{{ formatDate(testimonial.date) }}</span>
+              </div>
+
+              <!-- Review Text -->
+              <blockquote class="review-text">
+                {{ testimonial.review }}
+              </blockquote>
+
+              <!-- Service Info -->
+              <div class="service-info">
+                <div class="service-badge">
+                  <svg class="service-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.92,6.01C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6.01L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6.01M6.5,6.5H17.5L19,11H5L6.5,6.5M7,13.5A1.5,1.5 0 0,1 8.5,15A1.5,1.5 0 0,1 7,16.5A1.5,1.5 0 0,1 5.5,15A1.5,1.5 0 0,1 7,13.5M17,13.5A1.5,1.5 0 0,1 18.5,15A1.5,1.5 0 0,1 17,16.5A1.5,1.5 0 0,1 15.5,15A1.5,1.5 0 0,1 17,13.5Z"/>
+                  </svg>
+                  {{ testimonial.service }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Controls -->
+      <div class="carousel-controls">
+        <!-- Previous Button -->
+        <button 
+          type="button"
+          class="carousel-btn prev"
+          (click)="prevSlide()"
+          aria-label="Previous testimonial"
+          [disabled]="testimonials.length <= 1"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+          </svg>
+        </button>
+
+        <!-- Next Button -->
+        <button 
+          type="button"
+          class="carousel-btn next"
+          (click)="nextSlide()"
+          aria-label="Next testimonial"
+          [disabled]="testimonials.length <= 1"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Pagination Dots -->
+      <div class="carousel-pagination">
+        <button
+          *ngFor="let testimonial of testimonials; let i = index"
+          type="button"
+          class="pagination-dot"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to testimonial ' + (i + 1)"
+        ></button>
+      </div>
+
+      <!-- Auto-play Control -->
+      <div class="autoplay-control">
+        <button
+          type="button"
+          class="autoplay-btn"
+          (click)="toggleAutoPlay()"
+          [attr.aria-label]="isAutoPlaying ? 'Pause slideshow' : 'Play slideshow'"
+          [class.playing]="isAutoPlaying"
+        >
+          <svg *ngIf="isAutoPlaying" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14,19H18V5H14M6,19H10V5H6V19Z"/>
+          </svg>
+          <svg *ngIf="!isAutoPlaying" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="testimonials-cta">
+      <h3>Ready to Experience the AutoLux Difference?</h3>
+      <p>Join hundreds of satisfied customers who trust us with their vehicles</p>
+      <div class="cta-buttons">
+        <button type="button" class="cta-btn primary">
+          Book Your Service
+        </button>
+        <button type="button" class="cta-btn secondary">
+          Get Free Quote
+        </button>
+      </div>
+    </div>
+
+    <!-- Additional Social Proof -->
+    <div class="social-proof">
+      <div class="proof-item">
+        <div class="proof-number">500+</div>
+        <div class="proof-label">Happy Customers</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-number">5.0</div>
+        <div class="proof-label">Average Rating</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-number">100%</div>
+        <div class="proof-label">Satisfaction Rate</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-number">3+</div>
+        <div class="proof-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>

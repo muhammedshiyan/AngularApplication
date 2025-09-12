@@ -33,11 +33,14 @@ export const routes: Routes = [
     { path: 'about', component: AboutSectionComponent },
     { path: 'contact', component: ContactSectionComponent },
 
-    { path: 'restauation/about', component: About },
-    { path: 'restauation/hero', component: Hero },
-    { path: 'restauation/gallery', component: Gallery },
-    { path: 'restauation/testimonials', component: Testimonials },
-    { path: 'restauation/about', component: About },
+    { path: 'restauration/about', component: About },
+    { path: 'restauration/hero', component: Hero },
+    { path: 'restauration/gallery', component: Gallery },
+    { path: 'restauration/testimonials', component: Testimonials },
+    { path: 'restauration/about', component: About },
+    { path: 'restauration/header', component: Header },
+    { path: 'restauration/landing', component: Landing },
+    { path: 'restauration/contact', component: Contact },
 
     
 

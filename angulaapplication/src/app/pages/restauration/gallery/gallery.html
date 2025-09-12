@@ -1,1 +1,161 @@
-<p>gallery works!</p>
+<!-- components/gallery/gallery.component.html -->
+<section id="gallery" class="gallery-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">Our Work Gallery</h2>
+      <p class="section-subtitle">
+        See the transformative power of our professional car detailing services
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button
+        *ngFor="let category of categories; trackBy: trackByCategoryId"
+        type="button"
+        class="filter-btn"
+        [class.active]="activeCategory === category.id"
+        (click)="filterImages(category.id)"
+        [attr.aria-pressed]="activeCategory === category.id"
+      >
+        {{ category.name }}
+        <span class="count" *ngIf="category.count > 0">({{ category.count }})</span>
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading gallery...</p>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div 
+      class="gallery-grid" 
+      [class.loading]="isLoading"
+      *ngIf="!isLoading"
+    >
+      <div
+        *ngFor="let image of filteredImages; trackBy: trackByImageId"
+        class="gallery-item"
+        (click)="openLightbox(image)"
+        [attr.aria-label]="'View ' + image.title + ' in lightbox'"
+        tabindex="0"
+        (keydown.enter)="openLightbox(image)"
+        (keydown.space)="openLightbox(image)"
+      >
+        <!-- Image Container -->
+        <div class="image-container">
+          <img
+            [src]="image.thumbnail"
+            [alt]="image.alt"
+            class="gallery-image"
+            loading="lazy"
+            (error)="onImageError($event)"
+          />
+          
+          <!-- Overlay -->
+          <div class="image-overlay">
+            <div class="overlay-content">
+              <h3 class="image-title">{{ image.title }}</h3>
+              <p class="image-description" *ngIf="image.description">
+                {{ image.description }}
+              </p>
+              
+              <!-- View Button -->
+              <button type="button" class="view-btn" aria-label="View full size image">
+                <svg class="view-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                </svg>
+                View Full Size
+              </button>
+            </div>
+          </div>
+          
+          <!-- Category Badge -->
+          <div class="category-badge">{{ image.category }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredImages.length === 0 && !isLoading" class="empty-state">
+      <div class="empty-icon">🚗</div>
+      <h3>No images found</h3>
+      <p>We're working on adding more amazing transformations to this category.</p>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div 
+    class="lightbox-overlay" 
+    [class.active]="isLightboxOpen"
+    (click)="closeLightbox()"
+    *ngIf="isLightboxOpen"
+  >
+    <div class="lightbox-container" (click)="$event.stopPropagation()">
+      <!-- Close Button -->
+      <button 
+        type="button"
+        class="lightbox-close"
+        (click)="closeLightbox()"
+        aria-label="Close lightbox"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+        </svg>
+      </button>
+
+      <!-- Navigation Buttons -->
+      <button 
+        type="button"
+        class="lightbox-nav prev"
+        (click)="previousImage()"
+        aria-label="Previous image"
+        *ngIf="filteredImages.length > 1"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+        </svg>
+      </button>
+
+      <button 
+        type="button"
+        class="lightbox-nav next"
+        (click)="nextImage()"
+        aria-label="Next image"
+        *ngIf="filteredImages.length > 1"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+        </svg>
+      </button>
+
+      <!-- Image Content -->
+      <div class="lightbox-content" *ngIf="currentImage">
+        <div class="lightbox-image-container">
+          <img
+            [src]="currentImage.src"
+            [alt]="currentImage.alt"
+            class="lightbox-image"
+            (error)="onImageError($event)"
+          />
+        </div>
+        
+        <!-- Image Info -->
+        <div class="lightbox-info">
+          <h3 class="lightbox-title">{{ currentImage.title }}</h3>
+          <p class="lightbox-description" *ngIf="currentImage.description">
+            {{ currentImage.description }}
+          </p>
+          
+          <!-- Image Counter -->
+          <div class="image-counter" *ngIf="filteredImages.length > 1">
+            {{ currentImageIndex + 1 }} of {{ filteredImages.length }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
