@@ -21,6 +21,7 @@ import { Testimonials } from './pages/restauration/testimonials/testimonials';
 import { Gallery } from './pages/restauration/gallery/gallery';
 import { Contact } from './pages/restauration/contact/contact';
 import { About } from './pages/restauration/about/about';
+import { Dashboard } from './pages/restauration/dashboard/dashboard'; 
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -41,6 +42,7 @@ export const routes: Routes = [
     { path: 'restauration/header', component: Header },
     { path: 'restauration/landing', component: Landing },
     { path: 'restauration/contact', component: Contact },
+    { path: 'restauration/dashboard', component: Dashboard },
 
     
 
