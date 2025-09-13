@@ -1,1 +1,46 @@
-<p>about works!</p>
+<section class="about-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h1 class="section-title">About Us</h1>
+      <p class="section-subtitle">
+        Building solutions with innovation, passion, and precision.
+      </p>
+    </div>
+
+    <!-- Content -->
+    <div class="about-content">
+      <!-- Left: Mission -->
+      <div class="about-text-block">
+        <p>
+          We specialize in crafting digital solutions that empower individuals
+          and businesses. From intuitive applications to scalable platforms,
+          our focus is always on simplicity, reliability, and innovation.
+        </p>
+        <p>
+          Our mission is to push boundaries, embrace creativity, and deliver
+          impactful experiences that truly make a difference.
+        </p>
+      </div>
+
+      <!-- Right: Highlights -->
+      <div class="about-highlight">
+        <h3>Why Choose Us?</h3>
+        <ul>
+          <li>🚀 Cutting-edge technology</li>
+          <li>🤝 Long-term partnerships</li>
+          <li>🎯 Scalable, future-proof solutions</li>
+          <li>💡 Innovation-driven mindset</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Counters -->
+    <div class="about-counters">
+      <div class="counter-card" *ngFor="let c of counters">
+        <h2>{{ c.current }}+</h2>
+        <p>{{ c.label }}</p>
+      </div>
+    </div>
+  </div>
+</section>

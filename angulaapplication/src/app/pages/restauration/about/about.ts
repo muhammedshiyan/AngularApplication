@@ -1,40 +1,38 @@
-import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-gallery',
+  selector: 'app-about',
   standalone: true,
-  templateUrl: './gallery.html',
-  styleUrls: ['./gallery.css']
+  imports: [CommonModule],
+  templateUrl: './about.html',
+  styleUrls: ['./about.css']
 })
-export class Gallery implements OnInit, OnDestroy {
-  private isBrowser: boolean;
+export class About implements AfterViewInit {
+  counters = [
+    { label: 'Years of Experience', value: 11, current: 0 },
+    { label: 'Projects Delivered', value: 50, current: 0 },
+    { label: 'Happy Clients', value: 25, current: 0 }
+  ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
+  ngAfterViewInit() {
+    this.animateCounters();
   }
 
-  ngOnInit() {
-    if (this.isBrowser) {
-      this.setupKeyboardNavigation();
-    }
+  animateCounters() {
+    this.counters.forEach(counter => {
+      let start = 0;
+      const end = counter.value;
+      const step = Math.ceil(end / 100); // smooth animation
+      const interval = setInterval(() => {
+        start += step;
+        if (start >= end) {
+          counter.current = end;
+          clearInterval(interval);
+        } else {
+          counter.current = start;
+        }
+      }, 30);
+    });
   }
-
-  ngOnDestroy() {
-    if (this.isBrowser) {
-      this.removeKeyboardNavigation();
-    }
-  }
-
-  setupKeyboardNavigation() {
-    document.addEventListener('keydown', this.handleKeydown);
-  }
-
-  removeKeyboardNavigation() {
-    document.removeEventListener('keydown', this.handleKeydown);
-  }
-
-  handleKeydown = (event: KeyboardEvent) => {
-    console.log('Key pressed:', event.key);
-  };
 }
