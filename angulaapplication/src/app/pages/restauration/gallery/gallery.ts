@@ -25,7 +25,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 1,
       src: 'assets/images/gallery/exterior-detail-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/exterior-detail-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/exterior-detail-1.jpg',
       alt: 'Luxury car exterior detailing - before and after',
       category: 'exterior',
       title: 'Premium Exterior Detail',
@@ -34,7 +34,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 2,
       src: 'assets/images/gallery/interior-detail-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/interior-detail-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/interior-detail-1.jpg',
       alt: 'Luxury car interior cleaning and conditioning',
       category: 'interior',
       title: 'Interior Deep Clean',
@@ -43,7 +43,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 3,
       src: 'assets/images/gallery/ceramic-coating-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/ceramic-coating-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/ceramic-coating-1.jpg',
       alt: 'Ceramic coating application process',
       category: 'coating',
       title: 'Ceramic Coating',
@@ -52,7 +52,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 4,
       src: 'assets/images/gallery/paint-correction-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/paint-correction-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/paint-correction-1.jpg',
       alt: 'Paint correction and swirl mark removal',
       category: 'correction',
       title: 'Paint Correction',
@@ -61,7 +61,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 5,
       src: 'assets/images/gallery/luxury-suv-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/luxury-suv-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/luxury-suv-1.jpg',
       alt: 'Luxury SUV complete detailing service',
       category: 'exterior',
       title: 'SUV Complete Detail',
@@ -70,7 +70,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 6,
       src: 'assets/images/gallery/sports-car-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/sports-car-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/sports-car-1.jpg',
       alt: 'Sports car paint protection and detailing',
       category: 'coating',
       title: 'Sports Car Protection',
@@ -79,7 +79,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 7,
       src: 'assets/images/gallery/engine-detail-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/engine-detail-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/engine-detail-1.jpg',
       alt: 'Engine bay detailing and cleaning',
       category: 'engine',
       title: 'Engine Bay Detail',
@@ -88,7 +88,7 @@ export class Gallery implements OnInit, OnDestroy {
     {
       id: 8,
       src: 'assets/images/gallery/wheel-detail-1.jpg',
-      thumbnail: 'assets/images/gallery/thumbs/wheel-detail-1-thumb.jpg',
+      thumbnail: 'assets/images/gallery/thumbs/wheel-detail-1.jpg',
       alt: 'Wheel and tire detailing service',
       category: 'wheels',
       title: 'Wheel & Tire Detail',
