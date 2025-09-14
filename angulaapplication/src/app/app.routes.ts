@@ -34,6 +34,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutSectionComponent },
     { path: 'contact', component: ContactSectionComponent },
 
+    { path: 'restauration', component: Landing },
     { path: 'restauration/about', component: About },
     { path: 'restauration/hero', component: Hero },
     { path: 'restauration/gallery', component: Gallery },

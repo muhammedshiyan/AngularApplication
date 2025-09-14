@@ -8,7 +8,7 @@ import { ChartDataModel , GanttTask } from '../models/model/model';
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'https://localhost:5001/api/dashboard';
+  private apiUrl = 'https://localhost:7108/api/restauration/dashboard';
 
   constructor(private http: HttpClient) {}
 

@@ -66,25 +66,25 @@ export class Dashboard implements AfterViewInit {
       error: () => this.createBarChart(this.getStaticBarData())
     });
 
-    // --- GANTT CHART ---
-    // this.dashboardService.getGanttTasks().subscribe({
-    //   next: tasks => this.createGanttChart(tasks || this.getStaticGanttTasks()),
-    //   error: () => this.createGanttChart(this.getStaticGanttTasks())
-    // });
+    //--- GANTT CHART ---
+    this.dashboardService.getGanttTasks().subscribe({
+      next: tasks => this.createGanttChart(tasks || this.getStaticGanttTasks()),
+      error: () => this.createGanttChart(this.getStaticGanttTasks())
+    });
 
-      setTimeout(() => {
-      const tasks: GanttTask[] = this.getGanttTasks();
-      new Gantt(this.ganttContainer.nativeElement, tasks, this.getGanttOptions());
-    }, 0);
+    //   setTimeout(() => {
+    //   const tasks: GanttTask[] = this.getGanttTasks();
+    //   new Gantt(this.ganttContainer.nativeElement, tasks, this.getGanttOptions());
+    // }, 0);
   }
-  private getGanttTasks(): GanttTask[] {
-    // Replace with service call; fallback to static data
-    return [
-      { id: '1', name: 'Design', start: '2025-09-01', end: '2025-09-07', progress: 50 },
-      { id: '2', name: 'Development', start: '2025-09-08', end: '2025-09-20', progress: 20 },
-      { id: '3', name: 'Testing', start: '2025-09-21', end: '2025-09-25', progress: 0 },
-    ];
-  }
+  // private getGanttTasks(): GanttTask[] {
+  //   // Replace with service call; fallback to static data
+  //   return [
+  //     { id: '1', name: 'Design', start: '2025-09-01', end: '2025-09-07', progress: 50 },
+  //     { id: '2', name: 'Development', start: '2025-09-08', end: '2025-09-20', progress: 20 },
+  //     { id: '3', name: 'Testing', start: '2025-09-21', end: '2025-09-25', progress: 0 },
+  //   ];
+  // }
   private getGanttOptions(): GanttOptions {
     return {
       view_mode: 'Week',
